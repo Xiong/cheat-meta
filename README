@@ -1,1 +1,31 @@
+Bundle-Cheat version 0.0.1
 
+DEVELOPER README
+
+If a thing is worth having, it's worth cheating for. 
+    --W. C. Fields
+
+This is a collection of "cheat sheets": highly compressed, abbreviated 
+documentation for various modules. Each module within the bundle covers a 
+top-level namespace or a set of otherwise closely-related modules. 
+
+For each module, a paragraph is given, generally: 
+
+    Some::Module            # Short description
+        qw( various exportable symbols if any );
+        routine( $placeholder, @arguments );
+        $context    = function( @arguments);
+        $object->method();
+
+You should be able to copy and paste this into your own code, 
+delete what you don't need, and be on your way. 
+
+
+FOR DEVELOPERS
+
+Bundle::Cheat is a development tool. I don't expect help but I welcome it. 
+In particular, you're invited to ask about features you want to see in BC. 
+
+Please feel free to email me at <xiong@cpan.org>. 
+You can also use the wiki at: 
+<http://github.com/Xiong/bundle-cheat/wiki>.

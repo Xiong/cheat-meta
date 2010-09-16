@@ -49,6 +49,7 @@
 
 # Avoid archives of this distribution
 \bBundle-Cheat-[\d\.\_]+
+\bBundle-Cheat-v[\d\.\_]+
 
 #----------------------------------------------------------------------------#
 # Xiong                                                                      #
