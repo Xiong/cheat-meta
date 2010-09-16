@@ -6,16 +6,19 @@ use warnings;
 
 use version 0.77; our $VERSION = qv('0.0.1');
 
-## END MODULE
-return 1;   # Abort execution; fool syntax highlighting for following code.
-die 'Failed to abort. This line should never execute; please contact author.';
+#============================================================================#
+
+sub _kids {(
+
+    q{    Bundle::Cheat::Test         },
+#~     q{    Bundle::Cheat::Util         },
+
+)};
+
 
 #============================================================================#
-#=========# ALL CHEAT MODULES
-
-use Test::Cheat;
-
-#============================================================================#
+## END MODULE 
+1;
 __END__
 
 =head1 NAME
@@ -52,27 +55,22 @@ delete what you don't need, and be on your way.
 
 =head1 FUNCTIONS/METHODS
 
-None. This module does nothing at all; you shouldn't even try to C<use()> it,
-although it's harmless. Same goes for all *::Cheat modules. 
+None. This module does nothing at all. 
+You shouldn't even try to C<use()> it,
+although it's harmless to do so. 
+
+Other *::Cheat modules will C<die()> if used. 
 
 =head1 INTERFACE 
 
 Open the module (the *.pm file itself) in your editor. 
 Copy out whatever you like. 
 
+Yes, there could be many clever routines to print contents. Use your editor. 
+
 =head1 DIAGNOSTICS
 
-=over
-
-=item Failed to abort. This line should never execute; please contact author.
-
-This module contains executable code so that your editor will use
-its syntax highlighting feature, if any. But it would be madness to execute it
-all. Of the various strategies for suppressing execution of the cheat sheet, 
-the one chosen is to C<return 1;> unconditionally. I can't imagine how this 
-can fail; but if it does, I hope we will C<die()> before going further. 
-
-=back
+None. 
 
 =head1 CONFIGURATION AND ENVIRONMENT
 

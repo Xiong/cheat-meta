@@ -9,7 +9,10 @@ my $builder = Module::Build->new(
     dist_author         => 'Xiong Changnian <xiong@cpan.org>',
     dist_version_from   => 'lib/Bundle/Cheat.pm',
     requires            => {
-        'perl'              5.8.8,
+        'perl'                      => 5.008008,
+    },
+    build_requires      => {
+        'Test::More'                => 0.94,
     },
     add_to_cleanup      => [ 'Bundle-Cheat-*' ],
     meta_merge              => {
