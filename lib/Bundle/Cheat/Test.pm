@@ -21,8 +21,8 @@ use Test::More tests => 6;      # Standard framework for writing test scripts
     ok  ( $bool, $name );               # ok if $bool is true
     is  ( $got, $want, $name );         # ok if $got eq $want
     isnt( $got, $want, $name );         # ok if $got ne $want
-    like( $got, qr/./, $name );         # ok if $got =~ qr/regex/
-  unlike( $got, qr/./, $name );         # ok if $got !~ qr/regex/
+    like( $got, qr/./, $name );         # ok if $got =~ /regex/
+  unlike( $got, qr/./, $name );         # ok if $got !~ /regex/
   cmp_ok( $got, '==', $want, $name );    # ok if $got == $want
   my $object = new_ok( $class => \@args );  # calls $class->new(@args)
   can_ok( $object, @methods );              # ...or: can_ok($module...
@@ -42,6 +42,37 @@ use Test::More;                     # declare number of tests later
     my @dump = explain( @refs );            # uses Data::Dumper
     my @dump = explain( \@array, \%hash );  #   to dump list of references
     BAIL_OUT( $reason );        # abort this and all following test scripts
+
+use Test::Deep;                 # Extremely flexible deep comparison
+    cmp_deeply( $got, $want, $name );   # ok if $got eq $want deeply
+    # Special comparision functions for each value; may be nested
+    my $cmp = {                     # check each $got->{key}        # $gv...
+        key     => ignore(),            # ok regardless of $gv
+        key     => 'literal',           # ok if $gv eq 'literal'
+        key     => re('regex'),         # ok if $gv =~ /regex/
+        key     => bag(@want),          # ignore ordering of elements
+        key     => set(@want),          # ignore ord.of and duplicate elements
+        key     => superbagof(@want),   # $gv contains at least this bag
+        key     => subbagof  (@want),   # $gv contains at most  this bag
+        key     => supersetof(@want),   # $gv contains at least this in order
+        key     => subsetof  (@want),   # $gv contains at most  this in order
+        key     => all(@want),          # ok if $gv eq all @want (and)
+        key     => any(@want),          # ok if $gv eq any @want (or)
+        key     => array_each($cmp2),   # check each @{$gv} against $cmp2
+        key     => str ($want),         # stringify $gv eq $want
+        key     => num ($want, $tolc),  # numify    $gv == $want +/- $tolc
+        key     => bool($want),         # ok if ( !!$gv == !!$want )
+        key     => code($cref),         # $c = sub( $gv = shift; return $ok );
+        key     => isa($class),         # ok if $gv->UNIVERSAL::isa($class)
+        key     => methods(             # invoke methods of $gv
+            method => $want,            # ok if $gv->method()      eq $want
+          [ method, @args ] => $want,   # ok if $gv->method(@args) eq $want
+        ),
+    };
+    cmp_deeply( $got, $cmp,  $name ); # ok if $got special $cmp deeply
+
+
+
 
 
 #============================================================================#
@@ -83,6 +114,8 @@ delete what you don't need, and be on your way.
 =item Test::Simple
 
 =item Test::More
+
+=item Test::Deep
 
 =back
 
