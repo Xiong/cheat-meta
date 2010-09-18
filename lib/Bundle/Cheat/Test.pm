@@ -155,7 +155,7 @@ use Test::Trap(     # order of layers in the use-array is significant
     $trap->quiet;           # ok( !$trap->stdout && !$trap-stderr);
 ## Test::Trap
 
-use Test::Exception tests => 6; # Test exception based code
+#TODO: use Test::Exception tests => 6; # Test exception based code
 
 
 
@@ -168,7 +168,7 @@ __END__
 Bundle::Cheat::Test - Usage for Test::* modules
 
 =head1 SYNOPSIS
-    
+
     $ cat Bundle/Cheat/Test.pm
 
 =head1 DESCRIPTION
@@ -192,15 +192,27 @@ For each module, a paragraph is given, generally:
 You should be able to copy and paste this into your own code, 
 delete what you don't need, and be on your way. 
 
-=head1 MODULES
+=head1 CHEATS
 
 =over
 
-=item Test::Simple
+=item * L<Test::Simple>
 
-=item Test::More
+=item * L<Test::More>
 
-=item Test::Deep
+=item * L<Test::Deep>
+
+=item * L<Test::Trap>
+
+=back
+
+=head1 SEE ALSO
+
+=over
+
+=item * L<perlcheat>
+
+=item * L<Bundle::Cheat>
 
 =back
 

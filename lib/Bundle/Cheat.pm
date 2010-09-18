@@ -30,7 +30,7 @@ Bundle::Cheat - Copy-and-paste usage lines for lazy coders
 This document describes Bundle::Cheat version 0.0.1
 
 =head1 SYNOPSIS
-    
+
     $ cat Bundle/Cheat.pm
 
 =head1 DESCRIPTION
@@ -52,6 +52,22 @@ For each module, a paragraph is given, generally:
 
 You should be able to copy and paste this into your own code, 
 delete what you don't need, and be on your way. 
+
+=head1 CHEATS
+
+=over
+
+=item * L<Bundle::Cheat::Test>
+
+=back
+
+=head1 SEE ALSO
+
+=over
+
+=item * L<perlcheat>
+
+=back
 
 =head1 FUNCTIONS/METHODS
 
