@@ -11,7 +11,7 @@ use version 0.77; our $VERSION = qv('0.0.1');
 sub _kids {(
 
     q{    Bundle::Cheat::Test         },
-#~     q{    Bundle::Cheat::Util         },
+    q{    Bundle::Cheat::Util         },
 
 )};
 
@@ -58,6 +58,8 @@ delete what you don't need, and be on your way.
 =over
 
 =item * L<Bundle::Cheat::Test>
+
+=item * L<Bundle::Cheat::Util>
 
 =back
 
