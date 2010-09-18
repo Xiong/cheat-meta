@@ -1,0 +1,1 @@
+/home/xiong/projects/cheat/t/all/01.loadkids.t
