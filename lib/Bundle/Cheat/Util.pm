@@ -13,16 +13,93 @@ die 'Failed to abort. This line should never execute; please contact author.';
                                 # [<-44 cols to end                78 cols ->]
                                 # #2345678901234567890123456789012345678901234
 
-use 
+use Scalar::Util;               # General-utility scalar subroutines
+use Scalar::Util qw(
+    weaken isweak reftype refaddr blessed isvstring readonly tainted 
+    dualvar looks_like_number openhandle set_prototype 
+);
+    weaken $ref;            # $ref will not keep @$ref, %$ref, etc. from GC
+                            # note: copies of weak refs are not weak
+    $bool = isweak  $ref;       # true if $ref is a weak reference
+    $type = reftype $ref;       # 'SCALAR', 'ARRAY', 'HASH', or undef
+    $addr = refaddr $ref;       # machine address of $ref or undef
+    $got  = blessed $ref;       # class of blessed ref or undef 
+    $bool = isvstring $s;       # true if $s is a v-string
+    $bool = readonly  $s;       # true if $s is a readonly scalar
+    $bool = tainted   $s;       # true if $s is tainted
+    $got  = dualvar $num, $string;      # $got is $num or $string in context 
+    $bool = looks_like_number $n;       # true if $n can be a number
+    $fh   = openhandle $t_fh;       # $h if $t_fh is a tied or open filehandle
+    set_prototype $cref, $proto;        # sets prototype of &$cref to $proto
 
+use List::Util;                 # General-utility list subroutines
+use List::Util qw( max maxstr min minstr first reduce shuffle sum );
+    $got  = max    @a;          # returns item >  than all the rest
+    $got  = maxstr @a;          # returns item gt than all the rest
+    $got  = min    @a;          # returns item <  than all the rest
+    $got  = minstr @a;          # returns item lt than all the rest
+    $got  = first  {$_} @a;     # ~grep but returns only first true item 
+    $got  = reduce { $bool?$a:$b } @a;  # returns one item; last man standing 
+    $got  = sum @a;             # sum of all elements
+    @gots = shuffle @a;         # pseudo-randomizes order of @a
+    # "The following are additions that have been requested..."
+    sub any { $_ && return 1 for @_; 0 };       # One argument is true
+    sub all { $_ || return 0 for @_; 1 };       # All arguments are true
+    sub none { $_ && return 0 for @_; 1 };      # All arguments are false
+    sub notall { $_ || return 1 for @_; 0 };    # One argument is false
+    sub true { scalar grep { $_ } @_ };         # How many elements are true
+    sub false { scalar grep { !$_ } @_ };       # How many elements are false
 
+use List::MoreUtils ':all';     # The stuff missing in List::Util
+use List::MoreUtils qw(
+    any all none notall true false firstidx first_index 
+    lastidx last_index insert_after insert_after_string 
+    apply after after_incl before before_incl indexes 
+    firstval first_value lastval last_value each_array
+    each_arrayref pairwise natatime mesh zip uniq minmax
+);
+    # These operators take a block (~grep), setting $_ to each item in @a
+    # Your block should test $_ and return a $bool
+    $bool  = any    {$_} @a;    # true if any test  is  true   (  $A ||  $B )
+    $bool  = all    {$_} @a;    # true if all tests are true   (  $A &&  $B )
+    $bool  = none   {$_} @a;    # true if all tests are false  ( !$A && !$B )
+    $bool  = notall {$_} @a;    # true if any test  is  false  ( !$A || !$B )
+    #   #   #   #   #   #   De Morgan's Laws:    #   #   #   #   #   #   #   # 
+    # ( !$A && !$B ) == !(  $A || $B  ) and ( !$A || !$B ) == !(  $A &&  $B )
+    # (  $A &&  $B ) == !( !$A || !$B ) and (  $A ||  $B ) == !( !$A && !$B )
+    $count = true   {$_} @a;        # how many true tests
+    $count = false  {$_} @a;        # how many false tests
+    $got  = firstidx{$_} @a;        # first item with true test
+    $got  = first_index             # ditto; alias firstidx
+    $got  = lastidx {$_} @a;        # last item with true test
+    $got  = last_index              # ditto; alias lastidx
+    $got  = insert_after {$_} $v => @a;   # put $v in @a after first true test        
+    $got  = insert_after_string $s, $v => @a;  # insert after first item eq $s
+    @gots = apply       {$_} @a;    # ~ map but doesn't modify @a
+    @gots = after       {$_} @a;    # ( c )    ~~ after       {/b/} (a, b, c)
+    @gots = after_incl  {$_} @a;    # ( b, c ) ~~ after_incl  {/b/} (a, b, c)
+    @gots = before      {$_} @a;    # ( a )    ~~ before      {/b/} (a, b, c)
+    @gots = before_incl {$_} @a;    # ( a, b ) ~~ before_incl {/b/} (a, b, c)
+    @gots = indexes     {$_} @a;    # ( 1 )    ~~ indexes     {/b/} (a, b, c)
+    $got  = firstval    {$_} @a;    # ~List::Util::first()
+    $got  = first_value             # ditto; alias firstval
+    $got  = lastval     {$_} @a;    # last item testing true
+    $got  = last_value              # ditto; alias lastval
+    $cref = each_array @a, @b, @c;  # creates an n-tuplewise iterator closure
+    while ( my ($A, $B, $C) = $cref->() ) {     # returns empty list 
+        # Your code here                        #   when all lists exhausted
+    };
+    $cref = each_arrayref @a, @b, @c;   # iterator returns refs to arg lists
+    $cref = natatime $n, @a;    # creates $n-at-a-time iterator from one list
+    @gots = pairwise    {$_} @a, @b;    # ~map over two arrays
+    @gots = mesh @a, @b, @c;    # ( $a[0], $b[0], $c[0], $a[1], $b[1], $c[1] )
+    @gots = zip  @a, @b, @c;    # ditto; alias mesh
+    @gots = uniq @a;            # returns *only* unique elements
+    ( $min, $max )  = minmax @a;    # ~( List::Util::min(@a), ::max(@a) )
+    @refs = part { $p = f($_) } @a; # partitions @a into multiple lists
+    # you return integer $p as index of @refs; @refs is a list of arrayrefs
 
-
-
-
-
-
-
+use List::AllUtils qw( :all );  # Everything from List::Util, List::MoreUtils
 
 
 

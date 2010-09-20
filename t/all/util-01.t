@@ -34,6 +34,25 @@ use Devel::Comments '###', '####';
 
 #~ use Acme::Teddy;
 
+my $data    = [
+    [  0,  1,  2 ],
+    [ 10, 11, 12 ],
+    [ 20, 21, 22 ],
+];
+
+my @a   = @{ $data->[0] };
+my @b   = @{ $data->[1] };
+my @c   = @{ $data->[2] };
+
+use List::MoreUtils qw( each_array each_arrayref );
+
+my $ea  = each_array @a, @b, @c;
+
+### $ea
+
+
+__END__
+
 my $name    = 'You know my name.';
 
 use Test::More;
