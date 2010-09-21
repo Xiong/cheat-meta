@@ -81,7 +81,7 @@ use List::MoreUtils qw(
     @gots = before      {$_} @a;    # ( a )    ~~ before      {/b/} (a, b, c)
     @gots = before_incl {$_} @a;    # ( a, b ) ~~ before_incl {/b/} (a, b, c)
     @gots = indexes     {$_} @a;    # ( 1 )    ~~ indexes     {/b/} (a, b, c)
-    $got  = firstval    {$_} @a;    # ~List::Util::first()
+    $got  = firstval    {$_} @a;    # ~List::Util::first() but -1 on fail
     $got  = first_value             # ditto; alias firstval
     $got  = lastval     {$_} @a;    # last item testing true
     $got  = last_value              # ditto; alias lastval
@@ -100,7 +100,7 @@ use List::MoreUtils qw(
     # you return integer $p as index of @refs; @refs is a list of arrayrefs
 
 use List::AllUtils qw( :all );  # Everything from List::Util, List::MoreUtils
-
+    
 
 
 
