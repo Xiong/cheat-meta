@@ -101,6 +101,67 @@ use List::MoreUtils qw(
 
 use List::AllUtils qw( :all );  # Everything from List::Util, List::MoreUtils
     
+use List::Compare;              # Compare elements of two or more lists
+# This object-oriented module is highly orthogonal, 
+#   so that nearly any selection or choice may be combined with any other. 
+# Most methods are equally okay for ( just two ) or ( three or more ) lists; 
+#   some will Carp if called inappropriately.
+#                            === Options/Modes === 
+#           Regular: (default) Two lists, sorted results, many method calls ok
+#          Unsorted: Don't sort method results              ( faster ) 
+#       Accelerated: Only one method call possible per $lc  ( faster )
+#          Multiple: Three or more lists in constructor 
+# ! (specify $ix to refer to a given list; default 0; omit for only two lists)
+#         Seen-hash: Use hashrefs instead of arrayrefs: 
+#   [ 11, 12, 14, 14, 14, 15 ] ~~ { 11 => 1, 12 => 1, 14 => 3, 15 => 1 }
+#
+    # Construct a work-object 
+    my $lc = List::Compare->new(             \@a, \@b, @c );  # default
+    my $lc = List::Compare->new( '-u',       \@a, \@b, @c );  # unsorted
+    my $lc = List::Compare->new(       '-a', \@a, \@b, @c );  # accelerated
+    my $lc = List::Compare->new( '-u', '-a', \@a, \@b, @c );  #! -u before -a
+    # Wrap constructor arguments in a hashref
+    my $lc = List::Compare->new({
+        unsorted    => 1,
+        accelerated => 1,
+        lists       => [ \@a, \@b, @c ],
+    });
+    # Methods return lists of results
+    @gots = $lc->get_intersection;          # found in each/both list(s)
+    @gots = $lc->get_union;                 # found in any/either list
+    @gots = $lc->get_bag;                   # ~get_union but also duplicates
+    @gots = $lc->get_unique($ix);           # found only in list $ix
+    @gots = $lc->get_complement($ix);       # not found in $ix, but elsewhere
+    @gots = $lc->get_symmetric_difference;  # found in only one list
+    $gots = $lc->get_intersection_ref;          # ~methods above but
+    $gots = $lc->get_union_ref;                 #           returns \@gots
+    $gots = $lc->get_bag_ref;                   #       "
+    $gots = $lc->get_unique_ref($ix);           #       "
+    $gots = $lc->get_complement_ref($ix);       #       "
+    $gots = $lc->get_symmetric_difference_ref;  #       "
+    # Methods return boolean truth      # ( $ixL, $ixR ) default to ( 0, 1 )
+    $bool = $lc->isLsubsetR( $ixL, $ixR );      # true if all L in R
+    $bool = $lc->isRsubsetL( $ixL, $ixR );      # true if all R in L
+    $bool = $lc->isLequivalentR( $ixL, $ixR );  # true if same items in L, R
+    $bool = $lc->isLdisjointR( $ixL, $ixR );    # true if no items in common
+    # Methods return list of which lists ($ix) satisfying conditions
+    @ixs  = $lc->is_member_which($string);      # some item in $ix eq $string
+    @ixs  = $lc->are_members_which(\@strings);  # ~prev but eq any in @strings
+    # Dump
+    $lc->print_subset_chart;        # pretty-print tables showing some
+    $lc->print_equivalence_chart;   #   relationships; row/col as $ix
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
