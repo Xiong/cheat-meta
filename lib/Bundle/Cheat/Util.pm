@@ -31,6 +31,7 @@ use Scalar::Util qw(
     $bool = looks_like_number $n;       # true if $n can be a number
     $fh   = openhandle $t_fh;       # $h if $t_fh is a tied or open filehandle
     set_prototype $cref, $proto;        # sets prototype of &$cref to $proto
+## Scalar::Util
 
 use List::Util;                 # General-utility list subroutines
 use List::Util qw( max maxstr min minstr first reduce shuffle sum );
@@ -49,6 +50,7 @@ use List::Util qw( max maxstr min minstr first reduce shuffle sum );
     sub notall { $_ || return 1 for @_; 0 };    # One argument is false
     sub true { scalar grep { $_ } @_ };         # How many elements are true
     sub false { scalar grep { !$_ } @_ };       # How many elements are false
+## List::Util
 
 use List::MoreUtils ':all';     # The stuff missing in List::Util
 use List::MoreUtils qw(
@@ -98,6 +100,7 @@ use List::MoreUtils qw(
     ( $min, $max )  = minmax @a;    # ~( List::Util::min(@a), ::max(@a) )
     @refs = part { $p = f($_) } @a; # partitions @a into multiple lists
     # you return integer $p as index of @refs; @refs is a list of arrayrefs
+## List::MoreUtils
 
 use List::AllUtils qw( :all );  # Everything from List::Util, List::MoreUtils
     
@@ -150,14 +153,48 @@ use List::Compare;              # Compare elements of two or more lists
     # Dump
     $lc->print_subset_chart;        # pretty-print tables showing some
     $lc->print_equivalence_chart;   #   relationships; row/col as $ix
+# List::Compare
 
-
-
-
-
-
-
-
+use Hash::Util;                 # Hash key, value locking
+use Hash::Util qw(
+    lock_keys lock_keys_plus unlock_keys 
+    lock_value unlock_value 
+    lock_hash unlock_hash lock_hash_recurse unlock_hash_recurse
+    hash_locked hidden_keys legal_keys all_keys 
+);
+    # Restrict %hash to a set of keys; can delete but can't add other keys
+    \%hash = lock_keys     ( %hash );           # current keys %hash
+    \%hash = lock_keys     ( %hash, @keys );    # @keys; subset of keys @hash
+    \%hash = lock_keys_plus( %hash, @keys );    #        superset
+    \%hash = unlock_keys   ( %hash );           # remove restrictions
+    # Cannot alter value of $key but can delete the k/v pair
+    \%hash = lock_value    ( %hash, $key );
+    \%hash = unlock_value  ( %hash, $key );
+    # Lock the whole %hash; can't add, delete, or change value at all
+    \%hash = lock_hash              ( %hash );
+    \%hash = unlock_hash            ( %hash );
+    \%hash = lock_hash_recurse      ( %hash );  # HoHoH... only
+    \%hash = unlock_hash_recurse    ( %hash );  #   ditto
+    # Other functions...
+    $bool  = hash_unlocked ( %hash );       # true if %hash is unlocked
+    @keys  = legal_keys    ( %hash );       # list of keys allowed
+    @keys  = hidden_keys   ( %hash );       # see docs; experimental feature
+    \%hash = all_keys( %hash, @keys, @hidden );       # experimental feature
+    # Just like Daddy but take hashref arguments
+    \%hash = lock_ref_keys          ( \%hash );
+    \%hash = lock_ref_keys          ( \%hash, @keys );
+    \%hash = lock_ref_keys_plus     ( \%hash, @keys );
+    \%hash = unlock_ref_keys        ( \%hash );
+    \%hash = lock_ref_value         ( \%hash, $key );
+    \%hash = unlock_ref_value       ( \%hash, $key );
+    \%hash = lock_hashref           ( \%hash );
+    \%hash = unlock_hashref         ( \%hash );
+    \%hash = lock_hashref_recurse   ( \%hash );
+    \%hash = unlock_hashref_recurse ( \%hash );
+    $bool  = hash_ref_unlocked      ( \%hash );
+    @keys  = legal_ref_keys         ( \%hash );
+    @keys  = hidden_ref_keys        ( \%hash );
+## Hash::Util
 
 
 
