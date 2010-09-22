@@ -1,4 +1,4 @@
-package Bundle::Cheat::Util;
+package Cheat::Util;
 
 BEGIN {
     die 'OK';
@@ -202,11 +202,12 @@ __END__
 
 =head1 NAME
 
-Bundle::Cheat::Util - Usage for utility modules
+Cheat::Util - Usage for utility modules
 
 =head1 SYNOPSIS
 
-    $ cat Bundle/Cheat/Util.pm
+    $ vim Cheat/Util.pm
+    :syn on
 
 =head1 DESCRIPTION
 
@@ -253,7 +254,7 @@ delete what you don't need, and be on your way.
 
 =item * L<perlcheat>
 
-=item * L<Bundle::Cheat>
+=item * L<Cheat::Meta>
 
 =back
 
@@ -286,7 +287,7 @@ all. You should never, ever see this error.
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
-Bundle::Cheat::Util requires no configuration files or environment variables.
+Cheat::Util requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 
