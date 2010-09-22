@@ -28,4 +28,6 @@ my $builder = Module::Build->new(
     },
 );
 
+$builder->add_build_element('perl');
+
 $builder->create_build_script();
