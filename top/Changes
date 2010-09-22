@@ -1,5 +1,9 @@
 Revision history for Bundle-Cheat
 
+0.0.1   2010-09-18 03:15:47
+    - Base module Bundle::Cheat okay.
+    - ::Test written
+
 2010-09-14 01:12:55
     - Launch project.
 
