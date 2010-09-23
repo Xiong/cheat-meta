@@ -1,44 +1,23 @@
-package Bundle::Cheat;
+package [% package %];
 
-use 5.008008;
-use strict;
-use warnings;
-
-use version 0.77; our $VERSION = qv('0.0.1');
-
-#============================================================================#
-
-#~ use Cheat::Test;
-
-sub _kids {(
-
-    q{    Cheat::Test         },
-    q{    Cheat::Util         },
-
-)};
-
-
-#============================================================================#
-## END MODULE 
+## END MODULE
 1;
+#============================================================================#
 __END__
 
 =head1 NAME
 
-Bundle::Cheat - Copy-and-paste usage lines for lazy coders
-
-=head1 VERSION
-
-This document describes Bundle::Cheat version 0.0.1
+[% package %] - [% tagline %]
 
 =head1 SYNOPSIS
 
-    $ cat Bundle/Cheat.pm
+    $ vim [% package_path %].perl
+    :syn on
 
 =head1 DESCRIPTION
 
-I<If a thing is worth having, it's worth cheating for.> 
---W. C. Fields
+I<[% quote %]> 
+--[% quote_cite %]
 
 This is a collection of "cheat sheets": highly compressed, abbreviated 
 documentation for various modules. Each module within the bundle covers a 
@@ -58,12 +37,14 @@ delete what you don't need, and be on your way.
 =head1 CHEATS
 
 =over
-
-=item * L<Bundle::Cheat::Test>
-
-=item * L<Bundle::Cheat::Util>
-
+[% FOREACH cheat IN cheats %]
+=item * L</[% cheat %]>
+[% END %]
 =back
+
+[% FOREACH outline IN outlines %]
+[% outline -%]
+[% END %]
 
 =head1 SEE ALSO
 
@@ -71,30 +52,25 @@ delete what you don't need, and be on your way.
 
 =item * L<perlcheat>
 
+=item * L<Cheat::Meta>
+
 =back
 
 =head1 FUNCTIONS/METHODS
 
-None. This module does nothing at all. 
-You shouldn't even try to C<use()> it,
-although it's harmless to do so. 
-
-Other *::Cheat modules will C<die()> if used. 
+None. This module contains only POD. 
 
 =head1 INTERFACE 
 
-Open the module (the *.pm file itself) in your editor. 
+Open the cheat (the *.perl file) in your editor. 
 Copy out whatever you like. 
 
-Yes, there could be many clever routines to print contents. Use your editor. 
+If you look at the *.pm file, you'll see POD verbatim paragraphs.
+Your choice. 
 
-=head1 DIAGNOSTICS
+You can also get the same content in your pager with: 
 
-None. 
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-Bundle::Cheat requires no configuration files or environment variables.
+    perldoc [% package %]
 
 =head1 DEPENDENCIES
 
@@ -112,6 +88,8 @@ I hope.
 
 This module does not contain magic to squirt code into your module. 
 Copy and paste. 
+
+No boilerplate code will work right away. Edit it to your needs. 
 
 =head1 THANKS
 
