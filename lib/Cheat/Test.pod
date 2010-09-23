@@ -38,7 +38,6 @@ delete what you don't need, and be on your way.
 
 =over
 
-
 =item * L</ Test::Simple>
 
 =item * L</ Test::More>
@@ -50,28 +49,19 @@ delete what you don't need, and be on your way.
 =back
 
 
-    ##==========================================================================##
-    ##=======## TEST MODULES
+    # #========================================================================# #
+    # #=====# # TEST MODULES
                                     # [<-44 cols to end                78 cols ->]
                                     # #2345678901234567890123456789012345678901234
 
-
 =head2 Test::Simple
-
-
-
 
     use Test::Simple tests => 6;    # Basic utilities for writing tests
         ok( $bool, $name );             # ok if $bool is true
         ok( $foo eq $bar, $name );      # ok if $foo eq $bar
     ## Test::Simple
-    
-
 
 =head2 Test::More
-
-
-
 
     use Test::More tests => 6;      # Standard framework for writing test scripts
         ok  ( $bool, $name );               # ok if $bool is true
@@ -99,13 +89,8 @@ delete what you don't need, and be on your way.
         my @dump = explain( \@array, \%hash );  #   to dump list of references
         BAIL_OUT( $reason );        # abort this and all following test scripts
     ## Test::More
-    
-
 
 =head2 Test::Deep
-
-
-
 
     use Test::Deep;                 # Extremely flexible deep comparison
         cmp_deeply( $got, $want, $name );   # ok if $got eq $want deeply
@@ -135,13 +120,8 @@ delete what you don't need, and be on your way.
         };
         cmp_deeply( $got, $cmp,  $name ); # ok if $got special $cmp deeply
     ## Test::Deep
-    
-
 
 =head2 Test::Trap
-
-
-
 
     use Test::Trap;                 # Trap exit codes, exceptions, output, etc.
     # $trap object is exported into your namespace and contains everything.
@@ -223,21 +203,15 @@ delete what you don't need, and be on your way.
         $trap->did_return;      # $trap->leaveby_is('return');
         $trap->quiet;           # ok( !$trap->stdout && !$trap-stderr);
     ## Test::Trap
-    
+
     #TODO: use Test::Exception tests => 6; # Test exception based code
-    
-    
-    
-    
-
-
-============================================================================#
 
 
 
 
+    # #========================================================================# #
     __END__
-    
+
 
 =head1 SEE ALSO
 

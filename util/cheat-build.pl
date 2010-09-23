@@ -23,7 +23,9 @@ use File::Spec::Functions qw(
     canonpath
 );
 use Cwd;
-use Devel::Comments '###';
+
+#~ use Devel::Comments '###';
+use Devel::Comments '####';
 
 use Template;
 
@@ -33,10 +35,11 @@ use Template;
 my $base_dirabs         = getcwd();
 my $lib_dirrel          = q{lib/Cheat};
 my $tmpl_dirrel         = q{file};
+
 my $tmpl_file           = q{sheet.tt2};
 my $tmpl_fn_rel         = catfile ( $tmpl_dirrel, $tmpl_file );
 my $raw_ext             = q{.perl};
-my $out_ext             = q{.pm};
+my $out_ext             = q{.pod};
 
 my $pod_indent          = q{ } x 4;
 
@@ -57,7 +60,7 @@ for my $infile (@files_todo) {
 { # metro make_pod 
 
 # Shared variables...
-my $in_fh;
+my $in_fh           ;
 my @outlines        ;
 my $symbols         = {
     package             => q{Cheat::},      # default ignored
@@ -83,6 +86,7 @@ my $symbols         = {
                 when (/^#=tagline /)    { put_tagline($_) }
                 when (/^#=quote/)       { put_quote  ($_) }
                 when (/^#=/)            { put_pod    ($_) }
+                when (/^[\s]*$/)        { put_blank  ($_) }
                 default                 { put_code   ($_) }
             };
         };
@@ -98,6 +102,7 @@ my $symbols         = {
         $outfile    = $infile;
         
         #### $outfile
+        #### @outlines
         
         # Pass the stuff to Template, which opens, reads, and writes
         $tt->process( $tmpl_fn_rel, $symbols, $outfile )
@@ -159,18 +164,24 @@ my $symbols         = {
         
         # Be sure the previous line is correctly blank
         if ( @outlines ) {      # don't get burnt by undefined $outlines[-1]
-            if ( $outlines[-1] ne qq{\n} ) {
-                push @outlines, qq{\n};
+            if ( $outlines[-1] ne q{} ) {
+                push @outlines, q{};
             };
         };
         
-        # Add the line, with a trailing newline, and a blank line following
-        push @outlines, $in_line, qq{\n}, qq{\n};
+        # Add the line, with a blank line following
+        push @outlines, $in_line;
+        push @outlines, q{};
         
         if ( $in_line =~ s/=head[\d]?// ) {    # include in mini-TOC
             push @{ $symbols->{cheats} }, $in_line;
         };
         
+        return 1;
+    };
+    
+    sub put_blank {
+        push @outlines, q{};
         return 1;
     };
     
@@ -184,11 +195,6 @@ my $symbols         = {
 } ## metro make_pod
 
 
-
-
-__DATA__
-
-Output: 
 
 
 __END__

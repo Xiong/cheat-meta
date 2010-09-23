@@ -37,14 +37,14 @@ delete what you don't need, and be on your way.
 =head1 CHEATS
 
 =over
-
 [% FOREACH cheat IN cheats %]
 =item * L</[% cheat %]>
 [% END %]
 =back
 
 [% FOREACH outline IN outlines %]
-[% outline %][% END %]
+[% outline -%]
+[% END %]
 
 =head1 SEE ALSO
 
