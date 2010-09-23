@@ -1,17 +1,12 @@
-package Cheat::Util;
-
-BEGIN {
-    die 'OK';
-}
-
-## END MODULE
-return 1;   # Abort execution; fool syntax highlighting for following code.
-die 'Failed to abort. This line should never execute; please contact author.';
-
 #============================================================================#
-#=========# UTILITY MODULES
-                                # [<-44 cols to end                78 cols ->]
-                                # #2345678901234567890123456789012345678901234
+# Cheat::Util - Cheat sheet for utility modules
+# =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
+# = Free Software = Artistic License 2.0 = NO WARRANTY =
+# 
+# I only had a high school education and believe me,
+# I had to cheat to get that. 
+# --Sparky Anderson
+#----------------------------------------------------------------------------#
 
 use Scalar::Util;               # General-utility scalar subroutines
 use Scalar::Util qw(
@@ -103,7 +98,7 @@ use List::MoreUtils qw(
 ## List::MoreUtils
 
 use List::AllUtils qw( :all );  # Everything from List::Util, List::MoreUtils
-    
+
 use List::Compare;              # Compare elements of two or more lists
 # This object-oriented module is highly orthogonal, 
 #   so that nearly any selection or choice may be combined with any other. 
@@ -196,136 +191,5 @@ use Hash::Util qw(
     @keys  = hidden_ref_keys        ( \%hash );
 ## Hash::Util
 
-
 #============================================================================#
 __END__
-
-=head1 NAME
-
-Cheat::Util - Usage for utility modules
-
-=head1 SYNOPSIS
-
-    $ vim Cheat/Util.pm
-    :syn on
-
-=head1 DESCRIPTION
-
-I<I only had a high school education and believe me,> 
-I<I had to cheat to get that.> 
---Sparky Anderson
-
-This is a collection of "cheat sheets": highly compressed, abbreviated 
-documentation for various modules. Each module within the bundle covers a 
-top-level namespace or a set of otherwise closely-related modules. 
-
-For each module, a paragraph is given, generally: 
-
-    Some::Module            # Short description
-        qw( various exportable symbols if any );
-        routine( $placeholder, @arguments );
-        $context    = function( @arguments);
-        $object->method();
-
-You should be able to copy and paste this into your own code, 
-delete what you don't need, and be on your way. 
-
-=head1 CHEATS
-
-=over
-
-=item * L<Scalar::Util>
-
-=item * L<List::Util>
-
-=item * L<List::MoreUtils>
-
-=item * L<List::AllUtils>
-
-=item * L<List::Compare>
-
-=item * L<Hash::Util>
-
-=back
-
-=head1 SEE ALSO
-
-=over
-
-=item * L<perlcheat>
-
-=item * L<Cheat::Meta>
-
-=back
-
-=head1 FUNCTIONS/METHODS
-
-None. This module does nothing at all. 
-You shouldn't even try to C<use()> it;
-if you try, it will C<die()>.
-
-If it didn't C<die()> immediately, in an early C<BEGIN> block, 
-then it would try to C<use()> every single module it cheats. 
-So we don't do that. 
-
-=head1 INTERFACE 
-
-Open the module (the *.pm file itself) in your editor. 
-Copy out whatever you like. 
-
-=head1 DIAGNOSTICS
-
-=over
-
-=item Failed to abort. This line should never execute; please contact author.
-
-This module contains executable code so that your editor will use
-its syntax highlighting feature, if any. But it would be madness to execute it
-all. You should never, ever see this error. 
-
-=back
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-Cheat::Util requires no configuration files or environment variables.
-
-=head1 DEPENDENCIES
-
-No dependencies. 
-
-=head1 INCOMPATIBILITIES
-
-None.
-
-=head1 BUGS AND LIMITATIONS
-
-No cheat sheet will teach you anything. It's only a reminder. You B<must> 
-consult each module's own full documentation I<at least> before using it. 
-I hope. 
-
-This module does not contain magic to squirt code into your module. 
-Copy and paste. 
-
-=head1 THANKS
-
-=over
-
-=item *
-
-To about 8500 authors who have uploaded about 85,000 modules to the CPAN. 
-
-=back
-
-=head1 AUTHOR
-
-Xiong Changnian  C<< <xiong@cpan.org> >>
-
-=head1 LICENSE
-
-Copyright (C) 2010 Xiong Changnian C<< <xiong@cpan.org> >>
-
-This library and its contents are released under Artistic License 2.0:
-
-L<http://www.opensource.org/licenses/artistic-license-2.0.php>
-
-=cut

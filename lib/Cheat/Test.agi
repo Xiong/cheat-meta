@@ -1,7 +1,7 @@
 #=author  =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 #=license = Free Software = Artistic License 2.0 = NO WARRANTY =
 #=package Cheat::Test
-#=tagline Usage for Test::* modules
+#=tagline Cheat sheet for Test::* modules
 #=quote 
     The test itself is a cheat, isn't it?
     I mean you program it to be unwinnable.
@@ -11,6 +11,7 @@
 #-#=====# # TEST MODULES
 #-#                             # [<-44 cols to end                78 cols ->]
 #-#                             # #2345678901234567890123456789012345678901234
+#-#
 #=head2 Test::Simple
 use Test::Simple tests => 6;    # Basic utilities for writing tests
     ok( $bool, $name );                     # ok if $bool is true

@@ -214,9 +214,10 @@ exit(0);
 
 
 sub make_pod {
-    my $infile      = shift;
-    my $symbols     = shift;
-    my @outlines    ;
+    my $infile          = shift;
+    my $symbols         = shift;
+    my @outlines        ;
+    my @verbatim_lines  ;
     
     my $outfile     = $infile;
     $outfile =~ s/$raw_ext/$pod_ext/;
@@ -228,6 +229,11 @@ sub make_pod {
     #### $outfile
     
     # Do a little preparation for POD output
+    if ( defined $symbols->{outlines}{intro} ) {    # verbatim before any head
+        @verbatim_lines         = @{ $symbols->{outlines}{intro} };
+        for (@verbatim_lines) { s/^/$pod_indent/ };
+        push @outlines, @verbatim_lines;        
+    };
     my @cheats      = @{ $symbols->{cheats} };
     for my $cheat (@cheats) {
         #### $cheat
@@ -249,7 +255,7 @@ sub make_pod {
         push @outlines, q{};
         
         # Push the verbatim content keyed to that cheat
-        my @verbatim_lines      = @{ $symbols->{outlines}{$cheat} };
+        @verbatim_lines         = @{ $symbols->{outlines}{$cheat} };
         for (@verbatim_lines) { s/^/$pod_indent/ };
         push @outlines, @verbatim_lines;
         
@@ -272,9 +278,10 @@ sub make_pod {
 }; ## end make_pod
 
 sub make_perl {
-    my $infile      = shift;
-    my $symbols     = shift;
-    my @outlines    ;
+    my $infile          = shift;
+    my $symbols         = shift;
+    my @outlines        ;
+    my @verbatim_lines  ;
     
     my $outfile     = $infile;
     $outfile =~ s/$raw_ext/$perl_ext/;
@@ -286,12 +293,16 @@ sub make_perl {
     #### $outfile
     
     # Just aggregate all the cheats
+    if ( defined $symbols->{outlines}{intro} ) {    # verbatim before any head
+        @verbatim_lines         = @{ $symbols->{outlines}{intro} };
+        push @outlines, @verbatim_lines;        
+    };
     my @cheats      = @{ $symbols->{cheats} };
     for my $cheat (@cheats) {
         #### $cheat
         
         # Push the verbatim content keyed to that cheat
-        my @verbatim_lines      = @{ $symbols->{outlines}{$cheat} };
+        @verbatim_lines         = @{ $symbols->{outlines}{$cheat} };
         push @outlines, @verbatim_lines;
         
     }; ## for @cheats
