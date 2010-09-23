@@ -1,0 +1,108 @@
+package [% package %];
+
+## END MODULE
+1;
+#============================================================================#
+__END__
+
+=head1 NAME
+
+[% package %] - [% tagline %]
+
+=head1 SYNOPSIS
+
+    $ vim [% package_path %].perl
+    :syn on
+
+=head1 DESCRIPTION
+
+I<[% quote %]> 
+--[% quote_cite %]
+
+This is a collection of "cheat sheets": highly compressed, abbreviated 
+documentation for various modules. Each module within the bundle covers a 
+top-level namespace or a set of otherwise closely-related modules. 
+
+For each module, a paragraph is given, generally: 
+
+    Some::Module            # Short description
+        qw( various exportable symbols if any );
+        routine( $placeholder, @arguments );
+        $context    = function( @arguments);
+        $object->method();
+
+You should be able to copy and paste this into your own code, 
+delete what you don't need, and be on your way. 
+
+=head1 CHEATS
+
+=over
+[% FOREACH cheat IN cheats %]
+=item * L</[% cheat %]>
+[% END %]
+=back
+
+[% FOREACH outline IN p_outlines %]
+[% outline -%]
+[% END %]
+
+=head1 SEE ALSO
+
+=over
+
+=item * L<perlcheat>
+
+=item * L<Cheat::Meta>
+
+=back
+
+=head1 FUNCTIONS/METHODS
+
+None. This module contains only POD. Don't try to load it. 
+
+=head1 INTERFACE 
+
+Open the cheat (the *.perl file) in your editor. 
+Copy out whatever you like. 
+
+If you look at the *.pod file, you'll see POD verbatim paragraphs.
+Your choice. 
+
+You can also get the same content in your pager with: 
+
+    perldoc [% package %]
+
+=head1 BUGS AND LIMITATIONS
+
+No cheat sheet will teach you anything. It's only a reminder. You B<must> 
+consult each module's own full documentation I<at least> before using it. 
+I hope. 
+
+This module does not contain magic to squirt code into your module. 
+Copy and paste. 
+
+No boilerplate code will work right away. Edit it to your needs. 
+
+=head1 THANKS
+
+=over
+
+=item *
+
+To about 8500 authors who have uploaded about 85,000 modules to the CPAN. 
+
+=back
+
+=head1 AUTHOR
+
+Xiong Changnian  C<< <xiong@cpan.org> >>
+
+=head1 LICENSE
+
+Copyright (C) 2010 Xiong Changnian C<< <xiong@cpan.org> >>
+
+This library and its contents are released under Artistic License 2.0:
+
+L<http://www.opensource.org/licenses/artistic-license-2.0.php>
+
+=cut
