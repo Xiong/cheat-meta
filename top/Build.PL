@@ -14,10 +14,13 @@ my $builder = Module::Build->new(
     build_requires      => {
         'Test::More'                => 0.94,
     },
-    add_to_cleanup      => [ 'Bundle-Cheat-*' ],
+    add_to_cleanup      => [
+        'Cheat-*', 
+        'Bundle-Cheat-*', 
+    ],
     meta_merge              => {
         resources               => {
-            repository              => 'http://github.com/Xiong/bundle-cheat',
+            repository              => 'http://github.com/Xiong/cheat-meta',
         },
         keywords            => [ qw(
             help    usage

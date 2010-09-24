@@ -1,24 +1,18 @@
-#=author  =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
-#=license = Free Software = Artistic License 2.0 = NO WARRANTY =
-#=package Cheat::Test
-#=tagline Cheat sheet for Test::* modules
-#=quote 
-    The test itself is a cheat, isn't it?
-    I mean you program it to be unwinnable.
-    --James Tiberius Kirk
+#============================================================================#
+# Cheat::Sheet::Test - Cheat sheet for testing modules
+# =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
+# = Free Software = Artistic License 2.0 = NO WARRANTY =
+# 
+# The test itself is a cheat, isn't it?
+# I mean you program it to be unwinnable.
+# --James Tiberius Kirk
+#----------------------------------------------------------------------------#
 
-#-#========================================================================#-#
-#-#=====# # TEST MODULES
-#-#                             # [<-44 cols to end                78 cols ->]
-#-#                             # #2345678901234567890123456789012345678901234
-#-#
-#=head2 Test::Simple
 use Test::Simple tests => 6;    # Basic utilities for writing tests
     ok( $bool, $name );                     # ok if $bool is true
     ok( $foo eq $bar, $name );              # ok if $foo eq $bar
 ## Test::Simple
 
-#=head2 Test::More
 use Test::More tests => 6;      # Standard framework for writing test scripts
     ok  ( $bool, $name );                   # ok if $bool is true
     is  ( $got, $want, $name );             # ok if $got eq $want
@@ -46,7 +40,6 @@ use Test::More;                     # declare number of tests later
     BAIL_OUT( $reason );        # abort this and all following test scripts
 ## Test::More
 
-#=head2 Test::Deep
 use Test::Deep;                 # Extremely flexible deep comparison
     cmp_deeply( $got, $want, $name );   # ok if $got eq $want deeply
     # Special comparision functions for each value; may be nested
@@ -76,7 +69,6 @@ use Test::Deep;                 # Extremely flexible deep comparison
     cmp_deeply( $got, $cmp,  $name ); # ok if $got special $cmp deeply
 ## Test::Deep
 
-#=head2 Test::Trap
 use Test::Trap;                 # Trap exit codes, exceptions, output, etc.
 # $trap object is exported into your namespace and contains everything.
 # Methods can be combined in a large variety of ways; see Test::Trap POD.
@@ -158,11 +150,5 @@ use Test::Trap(     # order of layers in the use-array is significant
     $trap->quiet;           # ok( !$trap->stdout && !$trap-stderr);
 ## Test::Trap
 
+#============================================================================#
 __END__
-#TODO: use Test::Exception tests => 6; # Test exception based code
-
-
-
-
-#-#========================================================================#-#
-

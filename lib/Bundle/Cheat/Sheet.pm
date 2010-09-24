@@ -1,4 +1,4 @@
-package Bundle::Cheat;
+package Bundle::Cheat::Sheet;
 
 use 5.008008;
 use strict;
@@ -6,34 +6,21 @@ use warnings;
 
 use version 0.77; our $VERSION = qv('0.0.1');
 
-#============================================================================#
-
-#~ use Cheat::Test;
-
-sub _kids {(
-
-    q{    Cheat::Test         },
-    q{    Cheat::Util         },
-
-)};
-
-
-#============================================================================#
 ## END MODULE 
 1;
 __END__
 
 =head1 NAME
 
-Bundle::Cheat - Copy-and-paste usage lines for lazy coders
+Bundle::Cheat::Sheet - Copy-and-paste usage lines for lazy coders
 
 =head1 VERSION
 
-This document describes Bundle::Cheat version 0.0.1
+This document describes Bundle::Cheat::Sheet version 0.0.1
 
 =head1 SYNOPSIS
 
-    $ cat Bundle/Cheat.pm
+    $ perl -MCPAN -e 'install Bundle::Cheat::Sheet'
 
 =head1 DESCRIPTION
 
@@ -55,63 +42,27 @@ For each module, a paragraph is given, generally:
 You should be able to copy and paste this into your own code, 
 delete what you don't need, and be on your way. 
 
-=head1 CHEATS
+=head1 CONTENTS
 
-=over
+Cheat::Sheet::Test
 
-=item * L<Bundle::Cheat::Test>
-
-=item * L<Bundle::Cheat::Util>
-
-=back
+Cheat::Sheet::Util
 
 =head1 SEE ALSO
 
 =over
 
+=item * L<Cheat::Meta>
+
 =item * L<perlcheat>
 
 =back
-
-=head1 FUNCTIONS/METHODS
-
-None. This module does nothing at all. 
-You shouldn't even try to C<use()> it,
-although it's harmless to do so. 
-
-Other *::Cheat modules will C<die()> if used. 
-
-=head1 INTERFACE 
-
-Open the module (the *.pm file itself) in your editor. 
-Copy out whatever you like. 
-
-Yes, there could be many clever routines to print contents. Use your editor. 
-
-=head1 DIAGNOSTICS
-
-None. 
-
-=head1 CONFIGURATION AND ENVIRONMENT
-
-Bundle::Cheat requires no configuration files or environment variables.
-
-=head1 DEPENDENCIES
-
-No dependencies. 
-
-=head1 INCOMPATIBILITIES
-
-None.
 
 =head1 BUGS AND LIMITATIONS
 
 No cheat sheet will teach you anything. It's only a reminder. You B<must> 
 consult each module's own full documentation I<at least> before using it. 
 I hope. 
-
-This module does not contain magic to squirt code into your module. 
-Copy and paste. 
 
 =head1 THANKS
 

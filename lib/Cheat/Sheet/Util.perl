@@ -1,5 +1,5 @@
 #============================================================================#
-# Cheat::Util - Cheat sheet for utility modules
+# Cheat::Sheet::Util - Cheat sheet for utility modules
 # =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 # = Free Software = Artistic License 2.0 = NO WARRANTY =
 # 

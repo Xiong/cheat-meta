@@ -3,7 +3,7 @@
 #       =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 #       = Free Software = Artistic License 2.0 = NO WARRANTY =
 
-use 5.10.1;
+use 5.010001;
 use strict;
 use warnings;
 
