@@ -1,10 +1,10 @@
 =head1 NAME
 
-Cheat::Test - Usage for Test::* modules
+Cheat::Sheet::Test - Cheat sheet for testing modules
 
 =head1 SYNOPSIS
 
-    $ vim Cheat/Test.perl
+    $ vim Cheat/Sheet::Test.perl
     :syn on
 
 =head1 DESCRIPTION
@@ -192,7 +192,6 @@ delete what you don't need, and be on your way.
         $trap->quiet;           # ok( !$trap->stdout && !$trap-stderr);
     ## Test::Trap
 
-
 =head1 SEE ALSO
 
 =over
@@ -217,7 +216,7 @@ Your choice.
 
 You can also get the same content in your pager with: 
 
-    perldoc Cheat::Test
+    perldoc Cheat::Sheet::Test
 
 =head1 BUGS AND LIMITATIONS
 

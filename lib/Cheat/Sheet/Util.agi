@@ -1,6 +1,6 @@
 #=author  =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 #=license = Free Software = Artistic License 2.0 = NO WARRANTY =
-#=package Cheat::Util
+#=package Cheat::Sheet::Util
 #=tagline Cheat sheet for utility modules
 #=quote 
     I only had a high school education and believe me,
@@ -202,4 +202,5 @@ use Hash::Util qw(
 ## Hash::Util
 
 __END__
+
 #-#========================================================================#-#
