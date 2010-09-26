@@ -2,6 +2,10 @@
 
 [% package %] - [% tagline %]
 
+=head1 VERSION
+
+This document describes [% package %] version [% version %]
+
 =head1 SYNOPSIS
 
     $ vim [% package_path %].perl
