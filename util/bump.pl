@@ -37,7 +37,7 @@ use Perl::Version;              # Parse and manipulate Perl version strings
 #~ use Devel::Comments '###';
 #~ use Devel::Comments '####';
 #~ use Devel::Comments '#####';
-use Devel::Comments '###', '#####';
+#~ use Devel::Comments '###', '#####';
 
 #=========# Pseudo-globals
 
