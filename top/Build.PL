@@ -4,10 +4,10 @@ use warnings;
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'Bundle::Cheat',
+    module_name         => 'Cheat::Meta',
     license             => 'artistic_2',
     dist_author         => 'Xiong Changnian <xiong@cpan.org>',
-    dist_version_from   => 'lib/Bundle/Cheat.pm',
+    dist_version_from   => 'lib/Cheat/Meta.pod',
     requires            => {
         'perl'                      => 5.008008,
     },
