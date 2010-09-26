@@ -1,4 +1,4 @@
-Bundle-Cheat version 0.0.2
+Cheat-Meta version 0.0.2
 
 DEVELOPER README
 
@@ -23,8 +23,8 @@ delete what you don't need, and be on your way.
 
 FOR DEVELOPERS
 
-Bundle::Cheat is a development tool. I don't expect help but I welcome it. 
-In particular, you're invited to ask about features you want to see in BC. 
+I created the Cheat:: top-level namespace and scheme after much hesitation 
+and some encouragement. Please read Cheat::Meta::Spec for more info. 
 
 Please feel free to email me at <xiong@cpan.org>. 
 You can also use the wiki at: 

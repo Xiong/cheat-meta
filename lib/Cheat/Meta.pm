@@ -42,6 +42,20 @@ For each module, a paragraph is given, generally:
 You should be able to copy and paste this into your own code, 
 delete what you don't need, and be on your way. 
 
+=head2 Files
+
+Each cheat sheet comes in two formats. 
+Both are installed into your Perl library as if they were modules,
+according to your installer configuration. 
+
+B<Foo.perl> - Plain Perl code suitable for opening in the editor of your choice. 
+
+B<Foo.pod>  - The same content organized as a POD file. 
+
+You can also get the same content in your pager with: 
+
+    perldoc Cheat::Sheet::Foo
+
 =head1 DEVELOPERS
 
 Of course, if you have any interest in module cheat sheets, 
