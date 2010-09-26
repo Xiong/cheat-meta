@@ -4,20 +4,23 @@ use warnings;
 use Module::Build;
 
 my $builder = Module::Build->new(
-    module_name         => 'Bundle::Cheat',
+    module_name         => 'Cheat::Meta',
     license             => 'artistic_2',
     dist_author         => 'Xiong Changnian <xiong@cpan.org>',
-    dist_version_from   => 'lib/Bundle/Cheat.pm',
+    dist_version_from   => 'lib/Cheat/Meta.pm',
     requires            => {
         'perl'                      => 5.008008,
     },
     build_requires      => {
         'Test::More'                => 0.94,
     },
-    add_to_cleanup      => [ 'Bundle-Cheat-*' ],
+    add_to_cleanup      => [
+        'Cheat-*', 
+        'Bundle-Cheat-*', 
+    ],
     meta_merge              => {
         resources               => {
-            repository              => 'http://github.com/Xiong/bundle-cheat',
+            repository              => 'http://github.com/Xiong/cheat-meta',
         },
         keywords            => [ qw(
             help    usage
@@ -27,5 +30,7 @@ my $builder = Module::Build->new(
         ) ],
     },
 );
+
+$builder->add_build_element('perl');
 
 $builder->create_build_script();
