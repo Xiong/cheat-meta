@@ -24,8 +24,8 @@ This document describes Bundle::Cheat::Sheet version 0.0.2
 
 =head1 DESCRIPTION
 
-I<If a thing is worth having, it's worth cheating for.> 
---W. C. Fields
+I<No, we don't cheat. And even if we did, I'd never tell you.>
+--Tommy Lasorda
 
 This is a collection of "cheat sheets": highly compressed, abbreviated 
 documentation for various modules. Each module within the bundle covers a 

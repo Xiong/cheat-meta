@@ -45,7 +45,6 @@ delete what you don't need, and be on your way.
 
 =back
 
-
 =head2  Test::Simple
 
     use Test::Simple tests => 6;    # Basic utilities for writing tests
@@ -200,9 +199,9 @@ delete what you don't need, and be on your way.
 
 =over
 
-=item * L<perlcheat>
-
 =item * L<Cheat::Meta>
+
+=item * L<perlcheat>
 
 =back
 

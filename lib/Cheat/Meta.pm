@@ -42,17 +42,25 @@ For each module, a paragraph is given, generally:
 You should be able to copy and paste this into your own code, 
 delete what you don't need, and be on your way. 
 
-=head1 CONTENTS
+=head1 DEVELOPERS
 
-Cheat::Sheet::Test
+Of course, if you have any interest in module cheat sheets, 
+you're developing something in Perl. Check out the cheats. 
 
-Cheat::Sheet::Util
+If you want to develop cheat sheets themselves, 
+kindly check out L<Cheat::Meta::Spec> for the gory details. 
 
 =head1 SEE ALSO
 
 =over
 
-=item * L<Cheat::Meta>
+=item * L<Bundle::Cheat::Sheet>
+
+=item * L<Cheat::Sheet::Test>
+
+=item * L<Cheat::Sheet::Util>
+
+=item * L<Cheat::Meta::Spec>
 
 =item * L<perlcheat>
 

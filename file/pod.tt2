@@ -38,7 +38,6 @@ delete what you don't need, and be on your way.
 =item * L</[% cheat %]>
 [% END %]
 =back
-
 [% FOREACH outline IN p_outlines %]
 [% outline -%]
 [% END %]
@@ -46,9 +45,9 @@ delete what you don't need, and be on your way.
 
 =over
 
-=item * L<perlcheat>
-
 =item * L<Cheat::Meta>
+
+=item * L<perlcheat>
 
 =back
 

@@ -2,7 +2,7 @@
 # Cheat::Sheet::Util - Cheat sheet for utility modules
 # =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 # = Free Software = Artistic License 2.0 = NO WARRANTY =
-# 
+#                                                               v0.0.2
 # I only had a high school education and believe me,
 # I had to cheat to get that. 
 # --Sparky Anderson
