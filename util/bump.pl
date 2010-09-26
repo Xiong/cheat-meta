@@ -27,7 +27,7 @@ Getopt::Long::Configure ("bundling");   # enable, for instance, -xyz
 use Pod::Usage;                         # Build help text from POD
 use Text::Glob qw( glob_to_regex );     # Convert shell glob to Perl regex
 use List::MoreUtils qw( any );          # The stuff missing in List::Util
-use Perl::Version;              # Parse and manipulate Perl version strings
+#~ use Perl::Version;              # Parse and manipulate Perl version strings
 #-#                             # [<-44 cols to end                78 cols ->]
 
 #~ say '>>>', Perl::Version::REGEX, '<<<';
