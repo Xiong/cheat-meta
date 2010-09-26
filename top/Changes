@@ -1,8 +1,22 @@
-Revision history for Bundle-Cheat
+Revision history for Cheat-Meta
+
+0.0.2   2010-09-26 02:57:01
+    - Change namespacing entirely.
+        - Cheat-Meta            => the dist
+        - Cheat::Meta           => the base module
+        - Cheat::Meta::Spec     => (TODO) tell how to use the namespace
+        - Bundle::Cheat::Sheet  => Bundle of actual cheat sheets
+        - Cheat::Sheet:Test     => Cheat sheet for testing modules
+        - Cheat::Sheet:Util     => Cheat sheet for utility modules
+    - ::Util written.
+    - Create util/cheat-build.pl
+        - Development file      => .agi
+        - Editor file           => .perl
+        - POD file              => .pod
 
 0.0.1   2010-09-18 03:15:47
     - Base module Bundle::Cheat okay.
-    - ::Test written
+    - ::Test written.
 
 2010-09-14 01:12:55
     - Launch project.

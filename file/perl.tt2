@@ -2,7 +2,7 @@
 # [% package %] - [% tagline %]
 # [% author %]
 # [% license %]
-# 
+#                                                               v[% version %]
 [% FOREACH qline IN quote_lines -%]
 # [% qline %]
 [% END -%]

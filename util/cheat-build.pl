@@ -110,6 +110,7 @@ exit(0);
                 when (/^#-#/)           {}  # skip
                 when (/^#=author /)     { put_author ($_) }
                 when (/^#=license /)    { put_license($_) }
+                when (/^#=version /)    { put_version($_) }
                 when (/^#=package /)    { put_package($_) }
                 when (/^#=tagline /)    { put_tagline($_) }
                 when (/^#=quote/)       { put_quote  ($_) }
@@ -142,6 +143,14 @@ exit(0);
         chomp $in_line;
         $in_line =~ s/#=license[\s]*//;
         $symbols->{license}         = $in_line;
+        return 1;
+    };
+    
+    sub put_version {
+        my    $in_line      = shift;
+        chomp $in_line;
+        $in_line =~ s/#=version[\s]*//;
+        $symbols->{version}         = $in_line;
         return 1;
     };
     

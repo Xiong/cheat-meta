@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-use version 0.77; our $VERSION = qv('0.0.1');
+use version 0.77; our $VERSION = qv('0.0.2');
 
 ## END MODULE 
 1;
@@ -16,7 +16,7 @@ Bundle::Cheat::Sheet - Copy-and-paste usage lines for lazy coders
 
 =head1 VERSION
 
-This document describes Bundle::Cheat::Sheet version 0.0.1
+This document describes Bundle::Cheat::Sheet version 0.0.2
 
 =head1 SYNOPSIS
 
@@ -24,8 +24,8 @@ This document describes Bundle::Cheat::Sheet version 0.0.1
 
 =head1 DESCRIPTION
 
-I<If a thing is worth having, it's worth cheating for.> 
---W. C. Fields
+I<No, we don't cheat. And even if we did, I'd never tell you.>
+--Tommy Lasorda
 
 This is a collection of "cheat sheets": highly compressed, abbreviated 
 documentation for various modules. Each module within the bundle covers a 

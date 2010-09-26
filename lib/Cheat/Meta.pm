@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-use version 0.77; our $VERSION = qv('0.0.1');
+use version 0.77; our $VERSION = qv('0.0.2');
 
 ## END MODULE 
 1;
@@ -12,15 +12,15 @@ __END__
 
 =head1 NAME
 
-Bundle::Cheat::Sheet - Copy-and-paste usage lines for lazy coders
+Cheat::Meta - Copy-and-paste usage lines for lazy coders
 
 =head1 VERSION
 
-This document describes Bundle::Cheat::Sheet version 0.0.1
+This document describes Cheat::Meta version 0.0.2
 
 =head1 SYNOPSIS
 
-    $ perl -MCPAN -e 'install Bundle::Cheat::Sheet'
+    $ perl -MCPAN -e 'install Cheat::Meta'
 
 =head1 DESCRIPTION
 
@@ -42,17 +42,39 @@ For each module, a paragraph is given, generally:
 You should be able to copy and paste this into your own code, 
 delete what you don't need, and be on your way. 
 
-=head1 CONTENTS
+=head2 Files
 
-Cheat::Sheet::Test
+Each cheat sheet comes in two formats. 
+Both are installed into your Perl library as if they were modules,
+according to your installer configuration. 
 
-Cheat::Sheet::Util
+B<Foo.perl> - Plain Perl code suitable for opening in the editor of your choice. 
+
+B<Foo.pod>  - The same content organized as a POD file. 
+
+You can also get the same content in your pager with: 
+
+    perldoc Cheat::Sheet::Foo
+
+=head1 DEVELOPERS
+
+Of course, if you have any interest in module cheat sheets, 
+you're developing something in Perl. Check out the cheats. 
+
+If you want to develop cheat sheets themselves, 
+kindly check out L<Cheat::Meta::Spec> for the gory details. 
 
 =head1 SEE ALSO
 
 =over
 
-=item * L<Cheat::Meta>
+=item * L<Bundle::Cheat::Sheet>
+
+=item * L<Cheat::Sheet::Test>
+
+=item * L<Cheat::Sheet::Util>
+
+=item * L<Cheat::Meta::Spec>
 
 =item * L<perlcheat>
 

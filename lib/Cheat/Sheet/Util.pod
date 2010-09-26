@@ -2,6 +2,10 @@
 
 Cheat::Sheet::Util - Cheat sheet for utility modules
 
+=head1 VERSION
+
+This document describes Cheat::Sheet::Util version 0.0.2
+
 =head1 SYNOPSIS
 
     $ vim Cheat/Sheet::Util.perl
@@ -44,7 +48,6 @@ delete what you don't need, and be on your way.
 =item * L</ Hash::Util>
 
 =back
-
 
 =head2  Scalar::Util
 
@@ -245,9 +248,9 @@ delete what you don't need, and be on your way.
 
 =over
 
-=item * L<perlcheat>
-
 =item * L<Cheat::Meta>
+
+=item * L<perlcheat>
 
 =back
 

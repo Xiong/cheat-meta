@@ -11,3 +11,6 @@ sym
 # Ignore temporary files
 *.tmp
 *.pm.html
+
+# Ignore backup files
+*~
