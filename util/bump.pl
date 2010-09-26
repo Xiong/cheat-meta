@@ -8,7 +8,6 @@ use strict;
 use warnings;
 use Carp;
 
-#~ use Perl6::Junction qw( all any none one );
 #~ use List::Util qw(first max maxstr min minstr reduce shuffle sum);
 #~ use File::Spec;
 use File::Spec::Functions qw(
@@ -28,7 +27,12 @@ Getopt::Long::Configure ("bundling");   # enable, for instance, -xyz
 use Pod::Usage;                         # Build help text from POD
 use Text::Glob qw( glob_to_regex );     # Convert shell glob to Perl regex
 use List::MoreUtils qw( any );          # The stuff missing in List::Util
+use Perl::Version;              # Parse and manipulate Perl version strings
+#-#                             # [<-44 cols to end                78 cols ->]
 
+#~ say '>>>', Perl::Version::REGEX, '<<<';
+#~ say '>>>', Perl::Version::MATCH, '<<<';
+#~ exit(2);
 
 #~ use Devel::Comments '###';
 #~ use Devel::Comments '####';
@@ -47,16 +51,16 @@ dlock( my @getopt_setup     = qw(
     man
     
     n|dryrun
-    v|verbose
+    v|verbose+
     b|bump=s
 ));
 #    testrequired=i
 #    testoptional:s
 #    testnegatable!
 
-dlock( my $do_prefix        = q{_do_}           );
-dlock( my $ignore_file      = q{.gitignore}     );               
-
+dlock( my $do_prefix    = q{_do_}       );  # internal; subroutine prefix
+dlock( my $ignore_file  = q{.bumpskip}  );  # items to skip in bumping           
+dlock( my $di           = q{ } x 4      );  # indent diff lines by this much
 
 # Variables
 
@@ -64,13 +68,22 @@ my $getopt_okay     ;               # true if GetOptions() didn't fail
 my %options         ;               # will be filled by GetOptions()
 my @dispatch_setup  ;               # options processed in this order
 my $dispatch        ;               # key is option; value is coderef
-#~ my $write_files     ;               # if false, don't write any file
-dlock(my $write_files = 0);         # locked off during development
-my $verbose         ;               # if true, show lines (to be) changed
+my $write_files     = 1;            # if false, don't write any file
+#~ dlock(my $write_files = 0);         # locked off during development
+my $verbosity       = 0;            # verbosity level 1=some, 2=more
 my $bump            ;               # new version; specify as string
-my @ignore          ;               # list of regexes to ignore
 my $ignore_regex    ;               # giant regex of alternates
 my $recursion_depth = 0;            # safety counter
+
+# matches any version
+my $version_qr      = qr/(\d+(?:[.]\d+)*)/;
+
+#    >>>(?x-ism: ( (?i: Revision: \s+ ) | v | )
+#                              ( \d+ (?: [.] \d+)* )
+#                              ( (?: _ \d+ )? ) )<<<
+#    >>>(?x-ism: ^ ( \s* ) (?x-ism: ( (?i: Revision: \s+ ) | v | )
+#                              ( \d+ (?: [.] \d+)* )
+#                              ( (?: _ \d+ )? ) ) ( \s* ) $ )<<<
 
 ## Pseudo-globals
 
@@ -112,11 +125,13 @@ elsif (
 else  {
     for my $key (@dispatch_setup) {
         if ( exists $options{$key} ) {
-            ### $key
+            #### $key
             $dispatch->{$key}->( $options{$key} );
         };
     };
 };
+
+_note( 1, "Bumping files to version '$bump'." );
 
 # Items to do loop
 my @todo            ;
@@ -127,6 +142,7 @@ else {
     @todo           = @ARGV;
 };
 for (@todo) {
+    ### argument: $_
     _alter_item($_);
 };
 
@@ -156,7 +172,7 @@ sub _do_h {                                 # process -h, -hh, -hhh
 sub _do_usage {                             # process --usage|-h
     my $level       = shift;
     my @text        = (
-        q{Usage: bump [-n][-v] -b <version> [<file>|<folder>]+ },
+        q{Usage: bump [-n][-v]+ -b <version> [<file>|<folder>]+ },
         q{Type 'bump --help' for more info. },
     );
     given ($level) {
@@ -195,12 +211,14 @@ sub _do_man {                               # process --man|-hhh
 }; ## _do_man
 
 sub _do_n {                                 # process -n|--dryrun
-#~     $write_files = 0;
+    $write_files = 0;
+    _do_v(1);                   # turn on verbose mode for dry run
     return 1;
 }; ## _do_n
 
 sub _do_v {                                 # process -v|--verbose
-    $verbose = 1;
+    my $v       = shift;
+    $verbosity += $v;
     return 1;
 }; ## _do_v
 
@@ -210,28 +228,27 @@ sub _do_b {                                 # process -b|--bump
     return 1;
 }; ## _do_b
 
+#---------# Processing subroutines
 
 sub _alter_item {                           # alter file/folder; recursive
     my $item            = shift;
+    #### $item
     my @subitems        ;
+    
+    # Safety limit on recursion
     if ( $recursion_depth++ > 1000 ) {
         _fail( "Recursion depth safety limit exceeded" );
     };
     
-    _blacklist() if not @ignore;            # construct @ignore if needed
-#~     _blacklist() if not $ignore_regex;      # construct if needed
-    
-    if ( any { $item =~ $_ } @ignore ) {
-        _talk("$item -- Skipped.");
-        return 0;        
+    # Skip stuff that should not be bumped at all, ever
+    _blacklist() if not $ignore_regex;      # construct if needed
+    if ($item =~ $ignore_regex) {
+        _note( 2, "$item -- Skipped." );
+        return 1;
     };
-#~     if ($item =~ $ignore_regex) {
-#~         _talk("$item -- Skipped.");
-#~         return 0;
-#~     };
     
     my $item_stat       = lstat $item;
-    if    ( -d _ ) {
+    if    ( -d _ ) {                        # directory
         opendir my $dh, $item
             or _fail(  "Failed to opendir $item" );
         @subitems       = readdir $dh
@@ -240,47 +257,176 @@ sub _alter_item {                           # alter file/folder; recursive
             or _fail( "Failed to closedir $item" );
         
         for (@subitems) {
-            _alter_item( catfile( $item, $_ ) );                # recurse
+            next if (/^[.]/);                   # skip self, parent, dotfiles
+            _alter_item( catfile( $item, $_ ) );        # recurse
         };
     } 
-    elsif ( -f _ ) {
-        _alter_file($item);                 # base case
+    elsif ( -f _ ) {                        # plain file
+        _alter_file($item);                     # base case
     } 
-    else {
-        # something else; do nothing
+    else {                                  # other stuff
+        _note( 2, "$item -- Skipped." ); 
     };
     
     return 1;
 }; ## _alter_item
 
 sub _alter_file {                           # alter a file
-
+    my $item        = shift;
+    #### $item
+    my $oldfile     ;
+    my $infh        ;
+    my $outfh       ;
+    my $type        ;               # type of processing
+    my $lc          ;               # line counter
+    
+    # Select files for different kinds of change
+    given ($item) {
+        when (/\.pm/)       { $type = 'pm-pod' }
+        when (/\.pod/)      { $type = 'pod' }
+        when (/\.agi/)      { $type = 'agi' }
+        when (/README$/)    { $type = 'txt' }
+        default             { _note( 2, "$item -- Skipped." ); return 1; }
+    };
+    _note( 1, "$item: " );
+    
+    # Rename file to backup and open to write
+    if ($write_files) {
+        $oldfile    = $item . q{~};
+        rename $item, $oldfile;
+        open $outfh, '>', $item
+                or _fail(   "Failed to open $item for writing ");
+    }
+    else {
+        $oldfile    = $item;        # dry run only
+    };
+    
+    # Copy lines
+    open $infh, '<', $oldfile
+        or _fail(   "Failed to open $oldfile for reading ");
+    while ( my $inline = <$infh> ) {
+        $lc++;
+        my ( $outline, $altered )       = _alter_line( $inline, $type, $lc );
+        if ($write_files) {
+            print {$outfh} $outline;
+        };
+        if ($altered) {
+            _diff( $lc, $inline, $outline );
+        };
+    };
+    close $infh
+        or _fail(   "Failed to close $oldfile ");
+    if ( defined $outfh ) {
+        close $outfh
+            or _fail(   "Failed to close $item ");
+    };
+    
+    return 1;
 }; ## _alter_file
 
-sub _blacklist {
-#~     push @ignore, qr/^[.]{2}$/;            # parent ../
+sub _alter_line {
+    my $line        = shift;
+    my $type        = shift;
+    my $lc          = shift;
+    my $altered     ;
+    
+    # Alter lines if...
+    given ($type) {
+        when (/pm/) {
+            if ( $line =~ /VERSION =/ ) {
+                $line =~ s{(VERSION)(.*?)$version_qr(.*)}
+                          {$1$2$bump$4};
+                $altered++;
+            }
+            else {
+                continue;
+            };
+        }  
+        when (/pod/) {
+            if ( $line =~ /This document describes .*? version/ ) {
+                $line =~ s{$version_qr}
+                          {$bump};
+                $altered++;
+            }
+            else {
+                continue;
+            };
+        }  
+        when (/agi/) {
+            if ( $line =~ /^#=version/ ) {
+                $line =~ s{$version_qr}
+                          {$bump};
+                $altered++;
+            }
+            else {
+                continue;
+            };
+        }  
+        when (/txt/) {
+            if ( $line =~ /version/ and $lc == 1) {     # first line only
+                $line =~ s{$version_qr}
+                          {$bump};
+                $altered++;
+            }
+            else {
+                continue;
+            };
+        }  
+        
+        default {}
+    };
+    
+    return ( $line, $altered );
+}; ## _alter_line
+
+sub _blacklist {        # construct blacklist $ignore_regex; once only
+    my @ignore      ;
     open my $fh, '<', $ignore_file
-            or _fail(   "Failed to open $ignore_file for reading ");
+        or _fail(   "Failed to open $ignore_file for reading ");
     while (<$fh>) {
         given ($_) {
             when (/^#/)         { }         # skip comment
             when (/^[\s]*$/)    { }         # skip blank
             default             {
                 chomp;
-                push @ignore, glob_to_regex($_);
+                push @ignore, qr/$_/;
             }
         };
     };
-    close $fh;
-    ##### @ignore
-    $ignore_regex       = qr//;
-    for (@ignore) {
-        $ignore_regex   = qr/$ignore_regex|$_/;
-    };
-    ### $ignore_regex
+    close $fh
+        or _fail(   "Failed to close $ignore_file ");
+    #### @ignore
+    my $ignore_pat      = join q{|}, @ignore;
+    $ignore_regex       = qr/$ignore_pat/;
+    #### $ignore_regex
     return 1;
 }; ## _blacklist
 
+#---------# Screen output subroutines
+
+sub _diff {
+    my $lc          = shift;
+    my $inline      = shift;
+    my $outline     = shift;
+    
+    return 0 unless $verbosity;
+    
+    print $di . (               $lc ) . q{: --- } . $inline;
+    print $di . ( q{ } x length $lc ) . q{  +++ } . $outline;
+    
+    return 1;
+};
+
+
+sub _note {
+    my $priority        = shift;
+    my $intro           = q{#& };                   # introduce each line
+    
+    if ( $priority <= $verbosity ) {    # smaller number, higher priority
+        my $text        = join qq{\n} . $intro, @_;
+        say $intro, $text;
+    };
+}; ## _note
 
 sub _talk { _say_to_screen( \*STDOUT, @_ ) };                   # ~say
 
@@ -331,9 +477,9 @@ Required argument. Version-specifying lines will be bumped to this.
 
 Show what would be done. Implies --verbose.
 
-=item [-v|--verbose]
+=item [-v|--verbose]+
 
-Print each line changed. 
+If -v, print each line changed. If -vv, very verbose. 
 
 =item [-h|--usage]
 

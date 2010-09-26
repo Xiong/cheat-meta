@@ -1,7 +1,8 @@
+#=package Cheat::Sheet::Test
+#=version 0.0.1
+#=tagline Cheat sheet for testing modules
 #=author  =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 #=license = Free Software = Artistic License 2.0 = NO WARRANTY =
-#=package Cheat::Sheet::Test
-#=tagline Cheat sheet for testing modules
 #=quote 
     The test itself is a cheat, isn't it?
     I mean you program it to be unwinnable.

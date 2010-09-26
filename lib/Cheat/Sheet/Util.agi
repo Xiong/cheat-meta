@@ -1,7 +1,8 @@
+#=package Cheat::Sheet::Util
+#=version 0.0.1
+#=tagline Cheat sheet for utility modules
 #=author  =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 #=license = Free Software = Artistic License 2.0 = NO WARRANTY =
-#=package Cheat::Sheet::Util
-#=tagline Cheat sheet for utility modules
 #=quote 
     I only had a high school education and believe me,
     I had to cheat to get that. 
