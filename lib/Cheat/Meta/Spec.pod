@@ -1,10 +1,10 @@
 =head1 NAME
 
-Cheat::Spec - How to use the Cheat:: namespace
+Cheat::Meta::Spec - How to use the Cheat:: namespace
 
 =head1 VERSION
 
-This document is Cheat::Spec version 0.0.2
+This document is Cheat::Meta::Spec version 0.0.2
 
 =head1 SYNOPSIS
 

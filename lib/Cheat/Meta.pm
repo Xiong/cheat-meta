@@ -48,9 +48,11 @@ Each cheat sheet comes in two formats.
 Both are installed into your Perl library as if they were modules,
 according to your installer configuration. 
 
-B<Foo.perl> - Plain Perl code suitable for opening in the editor of your choice. 
+B<lib/Cheat/Sheet/Foo.perl> -
+ Plain Perl code suitable for opening in the editor of your choice. 
 
-B<Foo.pod>  - The same content organized as a POD file. 
+B<lib/Cheat/Sheet/Foo.pod>  -
+ The same content organized as a POD file. 
 
 You can also get the same content in your pager with: 
 
