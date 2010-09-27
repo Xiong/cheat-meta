@@ -4,7 +4,7 @@ Cheat::Sheet::Test - Cheat sheet for testing modules
 
 =head1 VERSION
 
-This document describes Cheat::Sheet::Test version 0.0.2
+This document describes Cheat::Sheet::Test version 0.0.3
 
 =head1 SYNOPSIS
 
