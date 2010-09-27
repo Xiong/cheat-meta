@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-use version 0.77; our $VERSION = qv('0.0.2');
+use version 0.77; our $VERSION = qv('0.0.3');
 
 ## END MODULE 
 1;
@@ -16,7 +16,7 @@ Cheat::Meta - Copy-and-paste usage lines for lazy coders
 
 =head1 VERSION
 
-This document describes Cheat::Meta version 0.0.2
+This document describes Cheat::Meta version 0.0.3
 
 =head1 SYNOPSIS
 
@@ -48,9 +48,11 @@ Each cheat sheet comes in two formats.
 Both are installed into your Perl library as if they were modules,
 according to your installer configuration. 
 
-B<Foo.perl> - Plain Perl code suitable for opening in the editor of your choice. 
+B<lib/Cheat/Sheet/Foo.perl> -
+ Plain Perl code suitable for opening in the editor of your choice. 
 
-B<Foo.pod>  - The same content organized as a POD file. 
+B<lib/Cheat/Sheet/Foo.pod>  -
+ The same content organized as a POD file. 
 
 You can also get the same content in your pager with: 
 
