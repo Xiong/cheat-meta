@@ -2,7 +2,7 @@
 # Cheat::Sheet::Util - Cheat sheet for utility modules
 # =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 # = Free Software = Artistic License 2.0 = NO WARRANTY =
-#                                                               v0.0.2
+#                                                               v0.0.4
 # I only had a high school education and believe me,
 # I had to cheat to get that. 
 # --Sparky Anderson
@@ -138,10 +138,10 @@ use List::Compare;              # Compare elements of two or more lists
     $gots = $lc->get_complement_ref($ix);       #       "
     $gots = $lc->get_symmetric_difference_ref;  #       "
     # Methods return boolean truth      # ( $ixL, $ixR ) default to ( 0, 1 )
-    $bool = $lc->isLsubsetR( $ixL, $ixR );      # true if all L in R
-    $bool = $lc->isRsubsetL( $ixL, $ixR );      # true if all R in L
-    $bool = $lc->isLequivalentR( $ixL, $ixR );  # true if same items in L, R
-    $bool = $lc->isLdisjointR( $ixL, $ixR );    # true if no items in common
+    $bool = $lc->is_LsubsetR( $ixL, $ixR );     # true if all L in R
+    $bool = $lc->is_RsubsetL( $ixL, $ixR );     # true if all R in L
+    $bool = $lc->is_LequivalentR( $ixL, $ixR ); # true if same items in L, R
+    $bool = $lc->is_LdisjointR( $ixL, $ixR );   # true if no items in common
     # Methods return list of which lists ($ix) satisfying conditions
     @ixs  = $lc->is_member_which($string);      # some item in $ix eq $string
     @ixs  = $lc->are_members_which(\@strings);  # ~prev but eq any in @strings

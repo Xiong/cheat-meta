@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-use version 0.77; our $VERSION = qv('0.0.3');
+use version 0.77; our $VERSION = qv('0.0.4');
 
 ## END MODULE 
 1;
@@ -16,7 +16,7 @@ Bundle::Cheat::Sheet - Copy-and-paste usage lines for lazy coders
 
 =head1 VERSION
 
-This document describes Bundle::Cheat::Sheet version 0.0.3
+This document describes Bundle::Cheat::Sheet version 0.0.4
 
 =head1 SYNOPSIS
 
