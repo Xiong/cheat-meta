@@ -1,5 +1,8 @@
 Revision history for Cheat-Meta
 
+0.0.4   2010-10-06 23:20:09
+    - Fix underbars (q|_|) in List::Compare methods.
+
 0.0.3   2010-09-27 15:14:58
     - Fix some namespacing.
 

@@ -2,7 +2,7 @@
 # Cheat::Sheet::Test - Cheat sheet for testing modules
 # =  Copyright 2010 Xiong Changnian <xiong@cpan.org>   =
 # = Free Software = Artistic License 2.0 = NO WARRANTY =
-#                                                               v0.0.2
+#                                                               v0.0.4
 # The test itself is a cheat, isn't it?
 # I mean you program it to be unwinnable.
 # --James Tiberius Kirk
