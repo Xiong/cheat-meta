@@ -4,7 +4,7 @@ Cheat::Meta::Spec - How to use the Cheat:: namespace
 
 =head1 VERSION
 
-This document is Cheat::Meta::Spec version 0.0.2
+This document is Cheat::Meta::Spec version 0.0.5
 
 =head1 SYNOPSIS
 

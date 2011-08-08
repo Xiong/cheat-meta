@@ -4,7 +4,7 @@ use 5.008008;
 use strict;
 use warnings;
 
-use version 0.77; our $VERSION = qv('0.0.4');
+use version 0.77; our $VERSION = qv('0.0.5');
 
 ## END MODULE 
 1;
@@ -16,7 +16,7 @@ Cheat::Meta - Copy-and-paste usage lines for lazy coders
 
 =head1 VERSION
 
-This document describes Cheat::Meta version 0.0.4
+This document describes Cheat::Meta version 0.0.5
 
 =head1 SYNOPSIS
 
@@ -104,7 +104,7 @@ Xiong Changnian  C<< <xiong@cpan.org> >>
 
 =head1 LICENSE
 
-Copyright (C) 2010 Xiong Changnian C<< <xiong@cpan.org> >>
+Copyright (C) 2010, 2011 Xiong Changnian C<< <xiong@cpan.org> >>
 
 This library and its contents are released under Artistic License 2.0:
 
