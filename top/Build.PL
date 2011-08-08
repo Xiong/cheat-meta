@@ -10,6 +10,7 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Cheat/Meta.pm',
     requires            => {
         'perl'                      => 5.008008,
+        'version'                   => 0.77,
     },
     build_requires      => {
         'Test::More'                => 0.94,
